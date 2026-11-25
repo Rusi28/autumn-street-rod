@@ -1,0 +1,268 @@
+:root {
+  --bg-dark: #232f3e;
+  --bg-grad: linear-gradient(135deg, #2b3a4a 0%, #3d3540 55%, #5c3d38 100%);
+  --panel: rgba(30, 40, 54, 0.88);
+  --cream: #f2ece1;
+  --amber: #e9c46a;
+  --crimson: #b8293d;
+  --teal: #29a8df;
+  --green: #7ae582;
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-dark);
+  color: var(--cream);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  display: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Álló telefon figyelmeztetés */
+#rotate-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--bg-dark);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+@media (orientation: portrait) and (max-width: 900px) {
+  #rotate-overlay {
+    display: flex;
+  }
+}
+
+/* Felső sáv */
+#top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px max(16px, env(safe-area-inset-right)) 10px max(16px, env(safe-area-inset-left));
+  background: var(--panel);
+  border-bottom: 2px solid var(--amber);
+  backdrop-filter: blur(6px);
+}
+
+.brand {
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--amber);
+  font-style: italic;
+}
+
+.stats {
+  display: flex;
+  gap: 16px;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+#ui-money {
+  color: var(--green);
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 2px solid var(--amber);
+  border-radius: 8px;
+  background: var(--bg-dark);
+  color: var(--cream);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+button.primary {
+  background: var(--crimson);
+  border-color: var(--cream);
+}
+
+button.active-tab {
+  background: var(--amber);
+  color: var(--bg-dark);
+}
+
+/* Fő 2D képernyő */
+#screen-container {
+  position: fixed;
+  inset: 66px 0 0 0;
+  padding: 20px max(20px, env(safe-area-inset-right)) 20px max(20px, env(safe-area-inset-left));
+  overflow-y: auto;
+  background: var(--bg-grad);
+  background-size: cover;
+  background-position: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--panel);
+  border: 2px solid rgba(233, 196, 106, 0.45);
+  border-radius: 12px;
+  padding: 16px;
+  backdrop-filter: blur(6px);
+}
+
+.card h2, .card h3 {
+  margin: 0 0 8px 0;
+  color: var(--amber);
+}
+
+.card p {
+  margin: 6px 0;
+  line-height: 1.4;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(242, 236, 225, 0.12);
+}
+
+/* Verseny HUD & Touch */
+#race-hud {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.hud-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px max(18px, env(safe-area-inset-right)) 0 max(18px, env(safe-area-inset-left));
+  pointer-events: auto;
+}
+
+#hud-speed {
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--amber);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+#hud-progress {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cream);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+#hud-status {
+  font-size: 24px;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--cream);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+#touch-controls {
+  position: fixed;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  left: max(18px, env(safe-area-inset-left));
+  right: max(18px, env(safe-area-inset-right));
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.touch-left, .touch-right {
+  display: flex;
+  gap: 12px;
+  pointer-events: auto;
+}
+
+.t-btn {
+  width: 74px;
+  height: 74px;
+  border-radius: 16px;
+  background: rgba(35, 47, 62, 0.72);
+  font-size: 18px;
+  touch-action: none;
+}
+
+.t-btn.gas {
+  background: rgba(184, 41, 61, 0.82);
+}
+
+.t-btn.brake {
+  background: rgba(41, 168, 223, 0.72);
+}
+
+/* Rajtlámpa */
+#start-lights {
+  position: fixed;
+  top: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 14px;
+  padding: 12px 18px;
+  background: rgba(20, 26, 36, 0.9);
+  border: 3px solid var(--amber);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.light {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #1a202c;
+  opacity: 0.25;
+  transition: opacity 0.1s, box-shadow 0.1s;
+}
+
+.light.red.on    { background: #ff3b30; opacity: 1; box-shadow: 0 0 18px #ff3b30; }
+.light.yellow.on { background: #f4c430; opacity: 1; box-shadow: 0 0 18px #f4c430; }
+.light.green.on  { background: #34c759; opacity: 1; box-shadow: 0 0 22px #34c759; }

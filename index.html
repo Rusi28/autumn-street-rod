@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Autumn Street Rod</title>
+</head>
+<body>
+  <!-- Álló telefon figyelmeztetés -->
+  <div id="rotate-overlay">
+    <div class="card">
+      <h2>Fordítsd el a telefont!</h2>
+      <p>A játék fekvő (landscape) módban játszható kényelmesen.</p>
+    </div>
+  </div>
+
+  <!-- 3D Vászon -->
+  <canvas id="race-canvas"></canvas>
+
+  <!-- Felső állapotsáv -->
+  <header id="top-bar">
+    <div class="brand">AUTUMN ROD</div>
+    <div class="stats">
+      <span id="ui-money">$1,500</span>
+      <span id="ui-car-name">1978 Városi Szedán</span>
+    </div>
+    <nav>
+      <button data-screen="garage">Garázs</button>
+      <button data-screen="shop">Alkatrészek</button>
+      <button data-screen="diner">Találkozóhely</button>
+    </nav>
+  </header>
+
+  <!-- 2D Képernyők -->
+  <main id="screen-container"></main>
+
+  <!-- Verseny HUD + Mobilos érintőgombok -->
+  <div id="race-hud" class="hidden">
+    <div class="hud-top">
+      <div class="hud-left">
+        <div id="hud-speed">0 km/h</div>
+        <div id="hud-progress">0 / 400 m</div>
+      </div>
+      <div id="hud-status">KÉSZÜLJ...</div>
+      <button id="btn-exit-race">Kilépés</button>
+    </div>
+	
+	<!-- Rajtlámpa -->
+    <div id="start-lights" class="hidden">
+      <div class="light red"></div>
+      <div class="light yellow"></div>
+      <div class="light green"></div>
+    </div>
+	
+    <div id="touch-controls">
+      <div class="touch-left">
+        <button id="t-left" class="t-btn" aria-label="Balra">◀</button>
+        <button id="t-right" class="t-btn" aria-label="Jobbra">▶</button>
+      </div>
+      <div class="touch-right">
+        <button id="t-brake" class="t-btn brake">FÉK</button>
+        <button id="t-gas" class="t-btn gas">GÁZ</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
