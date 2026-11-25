@@ -4,7 +4,7 @@ const SERVER_URL =
   window.location.hostname.startsWith('192.168.') ||
   window.location.hostname.startsWith('10.')
     ? undefined
-    : 'https://IDE-JON-A-RENDER-SERVER-CIMED.onrender.com';
+    : 'https://autumn-street-rod.onrender.com';
 
 const socket = io(SERVER_URL);
 
